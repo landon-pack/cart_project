@@ -75,6 +75,40 @@ def update_stock(item_name, inventory):
 # ============================================================
 # 3: LOYALTY — Membership lookup and discounts
 # ============================================================
+MEMBERS = {
+    "M001": {"name": "Sarah Johnson",  "discount": 0.10, "status": "active"},
+    "M002": {"name": "Mike Chen",      "discount": 0.15, "status": "active"},
+    "M003": {"name": "Emma Davis",     "discount": 0.05, "status": "inactive"}, 
+}
+
+
+def check_membership(cust_id, members_dict):
+    clean_id = cust_id.strip().upper() 
+    
+    if clean_id in members_dict:
+        found_member = members_dict[clean_id]
+
+        if found_member.get("status") == "active":
+            return found_member 
+            
+   
+    return None
+
+
+customer_id = input("Enter Membership ID: ")
+
+member = check_membership(customer_id, MEMBERS)
+
+if member: 
+    
+    customer_name = member["name"]
+    discount_rate = member["discount"]
+
+    print(f"Welcome back, {customer_name}! ({discount_rate * 100:.0f}% Membership Discount)")
+else:
+    customer_name = "Guest"
+    discount_rate = 0.0
+    print("Shopping as Guest today.")
 
 
 
